@@ -1,0 +1,93 @@
+\begin{frame}
+%\frametitle{Title}
+
+\begin{center}
+{\Large
+Pagliari et al.
+
+Kinect Fusion Improvement Using Depth Camera Calibration}
+
+COMP5115 - Fall 2019
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+
+\begin{itemize}
+\item Introduction and Motivation
+\item Related Works
+\item The KinectFusion Method
+\begin{itemize}
+  \item Measurement
+  \item Surface Reconstruction
+  \item Surface Prediction
+  \item Sensor Pose Estimation
+\end{itemize}
+\item Results and Conclusion
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction and Motivation}
+
+\begin{itemize}
+\item Purchased an Intel RealSense D435 Camera.
+\item Studied STAR paper by Zollh\"ofer to see how it could be used.
+\item Realized that article was too high-level (and advanced).
+\item KinectFusion seems to have established current paradigm. Explains math bits nicely,
+so a good starting paper.
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.25]{img/depth_selfie.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Problem Statement}
+
+Problem: process a stream of RGB-D frames for Simultaneous Localization and Mapping
+(and do it in real time!)
+
+\begin{itemize}
+  \item Tracking: estimate the pose (position + orientation) of the camera.
+  Camera presumed moving through space -- need to keep track of position and which way it's pointing.
+  \item Mapping: (incrementally) build a model of the scene captured by camera.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Challenges}
+\begin{itemize}
+  \item High volume of data (640x480 @ 30fps = 9 million points per sec)
+  \item Occlusion (stuff in the way), holes
+  \item Measurement errors: incident angles, shiny or transparent materials
+  \item Potentially erratic camera movement: blurry measurements
+  \item Dynamic scenes, moving objects
+  \item Camera drift: accumulation of errors in pose estimation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+  \frametitle<presentation>{Related Works}
+  \begin{thebibliography}{1}
+  \beamertemplatearticlebibitems
+
+  \bibitem{beardsley1997sfm}
+  \newblock Beardsley, et al. 1997
+\newblock Sequential updating of projective and affine structure from motionof projective and affine structure from motion.
+  \bibitem{fitzgibbon1998recovery}
+  \newblock Fitzgibbon et al. 1998
+  \newblock Automatic camera recovery for closed or open image sequences.
+  \bibitem{davidson2003slam}
+  \newblock A. J. Davison. 2003
+  \newblock Real-time simultaneous localisation and mapping with a single camera.
+  \bibitem{klein2007ptam}
+  \newblock G. Klein and D. W. Murray. 2007
+  \newblock Parallel tracking and mapping for small AR workspaces.
+  \bibitem{newcombe2010livedense}
+  \newblock R. A. Newcombe and A. J. Davison. 2010
+  \newblock Live dense reconstruction with a single moving camera.
+  \end{thebibliography}
+\end{frame}

@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template: Beamer arrows
+%
+% Source: http://www.texample.net/
+% Feel free to distribute this template, but please keep the
+% referal to TeXample.net.
+% Date: Nov 2006
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX:4
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{beamer} %
+\usetheme{CambridgeUS}
+\usepackage[latin1]{inputenc}
+\usefonttheme{professionalfonts}
+\usepackage{times}
+% \usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{csquotes}
+% \usetikzlibrary{arrows,shapes}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\sign}{sgn}
+
+\DeclareMathOperator{\EX}{\mathbb{E}}
+
+\author{Jo\"el Faubert}
+\title{3D Reconstruction with RGB-D Cameras}
+
+\begin{document}
+
+\begin{comment}
+:Title: State of the Art on 3D Reconstruction with RGB-D Cameras
+:Tags: Project Proposal for COMP5115
+:Use page: 3
+
+\end{comment}
+
+\everymath{\displaystyle}
+
+\input{introduction.tex}
+
+\input{method.tex}
+
+\input{results.tex}
+
+\input{references.tex}
+
+\end{document}
