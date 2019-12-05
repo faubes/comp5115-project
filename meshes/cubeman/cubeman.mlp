@@ -1,0 +1,118 @@
+<!DOCTYPE MeshLabDocument>
+<MeshLabProject>
+ <MeshGroup>
+  <MLMesh label="cube_man.ply" filename="../cube_man.ply">
+   <MLMatrix44>
+0.999721 -0.0115246 -0.0206222 -0.00744986 
+0.0119046 0.99976 0.0183961 0.00714979 
+0.0204052 -0.0186364 0.999618 0.00107063 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man2.ply" filename="../cube_man2.ply">
+   <MLMatrix44>
+0.97792 0.00160717 0.208973 0.0899064 
+-0.00804965 0.999518 0.0299825 0.0109598 
+-0.208824 -0.0310027 0.977462 -0.019892 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man3.ply" filename="../cube_man3.ply">
+   <MLMatrix44>
+0.795714 0.0228938 0.605239 0.238321 
+-0.0448391 0.99877 0.021171 0.00614402 
+-0.60401 -0.0439844 0.795762 -0.133451 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man4.ply" filename="../cube_man4.ply">
+   <MLMatrix44>
+0.473782 0.0246723 0.880296 0.323144 
+-0.177943 0.981671 0.0682569 0.00383464 
+-0.862477 -0.188982 0.469488 -0.286047 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man5.ply" filename="../cube_man5.ply">
+   <MLMatrix44>
+-0.712481 0.0338774 -0.700873 -0.397748 
+-0.0962759 0.984668 0.145465 0.052722 
+0.695055 0.171119 -0.698296 -0.623184 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man6.ply" filename="../cube_man6.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man7.ply" filename="../cube_man7.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man8.ply" filename="../cube_man8.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man9.ply" filename="../cube_man9.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man10.ply" filename="../cube_man10.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man11.ply" filename="../cube_man11.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man12.ply" filename="../cube_man12.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man13.ply" filename="../cube_man13.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man14.ply" filename="../cube_man14.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+ </MeshGroup>
+ <RasterGroup/>
+</MeshLabProject>
