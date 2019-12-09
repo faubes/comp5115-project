@@ -1,204 +1,43 @@
 \begin{frame}
-\frametitle{Method -- Overview}
+\frametitle{Fusion Methods}
+Goal: Reconstruct a global model $\mathbb{M} = (\hat{V}, \hat{N})$ from
+a sequence of depth frames $D_i = (V_i, N_i)$. \\
 
-Dense SLAM with Active Depth Sensing is an online scene reconstruction system
-composed of 4 steps:
+Assuming that the scene is static, depth frames can be fused into a single
+point cloud by finding the camera pose which aligns the current depth frame
+with the model. \\
 
-\begin{enumerate}
-  \item Surface Measurement: pre-processing, generate vertex data \& normals
-  \item Surface Reconstruction Update: use pose estimation to integrate new surface measurements into
-  global scene model (TSDF).
-  \item Surface Prediction: generate dense surface prediction to align new depth maps.
-  \item Sensor Pose Estimation: multi-scale ICP align between predicted surface and current measurement.
-\end{enumerate}
+Outlier points which do not fit in the model should be presumed errors and discarded.
 \end{frame}
 
-\begin{frame}
-\frametitle{Method -- Overview 2}
-
-\includegraphics[scale=0.45]{img/method_diagram.png}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Method -- Math Preliminaries}
-6 degree of freedom pose estimation representated as matrix
-
-\[ T_{g,k} = \begin{bmatrix} R_{g,k} & t_{g,k} \\ \mathbf{0}^T & 1 \end{bmatrix} \]
-
-(an element Special Euclidean group -- translations \& rotations but not reflections)
-
-It maps camera coordinate frame at time $k$ into global frame $g$.
-Point $p_k \in \mathbb{R}^3$ in camera space is transferred
-to global coordinate space via
-
-\[ p_g = T_{g,k} p_k \]
-
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Method -- Math Preliminaries 2}
-
-Three different reference frames for points: camera frustum, projective space (camera pixels) and
-global model.
-
-Camera matrix $K$ transforms points on the depth surface into image pixels.
-and $\pi (p)$ performs perspective projection (dehomogenization) to obtain
-camera pixel $q \in \mathbb{R}^2 = (x/z, y/z)^T$
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Method -- Surface Measurement}
-
-Raw depth map $R_k$ at time $k$ gives calibrated depth $R_k(u) \in \mathbb{R}$ at
-each pixel $u = (u,v)^T$ for $u \in \mathcal{U} \subset \mathbb{R}^2$ (camera pixel space).
-
-\[ \vec{p_k} = R_k(\vec{u})K^{-1}\dot{\vec{u}} \]
-
-$p_k$ is a metric point measurement in sensor frame $k$.
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Method -- Surface Measurement 2}
-
-Apply \textit{bilateral filter} to raw depth map to smooth noise.
-
-\[ D_k(\vec{u}) = \frac{1}{W_p} \sum_{\vec{q} \in \mathcal{U}} \mathcal{N}_{\sigma_s}(||\vec{u}-\vec{q}||_2) \mathcal{N}_{\sigma_r}(||R_k(\vec{u}) - R_k(\vec{q})||_2)R_k(\vec{q}) \]
-
-Where $W_p$ is a normalizing constant (two Gaussians) and $\sigma_r$ and $\sigma_s$ are
-parameters.
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Method -- Surface Measurement 3}
-{\large Vertex \& Normal Maps}
-
-Create vertex map $V_k$ by projecting filtered depth values back into sensor's frame of reference:
-
-\[ V_k{\vec{u}} = D_k(\vec{u})K^{-1}\dot{\vec{u}} \]
-
-Depth sensor frames are measurements on a regular grid so can approximate normals using
-neighbours easily:
-
-\[ N_k(\vec{u}) = v\left[(V_k(u+1, v) - V_k(u,v)) \times V_k(u, v+1) - V_k(u,v)\right] \]
-
-where $v[x] = \hat{x}$
-\end{frame}
-
-\begin{frame}
-\frametitle{Method -- Surface Measurement 4}
-{\large Validity Mask}
-
-Also need to keep track of sensor failures. Use \textit{validity mask}
-
-\[ M_k(\vec{u}) = \begin{cases} 1 & \text{depth measure transforms to valid vertex?} \\
-  0 & \text{otherwise} \end{cases} \]
-
-Finally, create ``multi-scale representation of surface measurement in form of a vertex and
-normal pyramid.''
-
-Depth \textit{pyramid} is a sequence $D^{l \in [1 \dots L ]}$ created by stacking
-depth map with sub-sample layers created by block-averaging (convolution?).
-\end{frame}
-
-\begin{frame}
-\frametitle{Method -- Surface Measurement 5}
-
-Authors use $L=3$ and are careful to ``discard depth values more than $3\sigma_r$
-of the central pixel to avoid smoothing over depth boundaries''.
-
-Vertex and normal pyramids are then $V^{l \in [1 \dots L]}$ and $N^{l \in [1 \dots L ]}$
-computed using corresponding depth pyramid layer.
-
-\[V_g^k(\vec{u}) = T_{g,k}\dot{V_k(\vec{u})} \]
-\[N_g^k(\vec{u}) = R_{g,k}N_k(\vec{u}) \]
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Method -- Mapping as Surface Reconstruction}
-{\Large Global \& Current TSDF}
-
-Function $S_k(\vec{p})$ is a fusion of TSDFs estimated
- from frames $1 \dots k$ (where $p \in \mathbb{R}^3$ a global frame point in 3D volume).
-
-\[ S_k(\vec{p}) \mapsto [F_k(p), W_k(p)] \]
-
-Assuming sensor error $\mu$, dense surface measurement provides two constraints
-\[ r \overset{?}{<} (\lambda R_k(\vec{u}) - \mu) \]
-where $\lambda = || K^{-1}\dot{u}||$.
-
-If less, detected free space. No surface information is obtained in reconstruction volume.
-Discard these values.
-\end{frame}
-
-\begin{frame}
-\frametitle{Method -- Mapping as Surface Reconstruction 2}
-
-For raw map $R_k$ with known pose $T_{g,k}$, its global frame projective
-TSDF is $[F_{R_k}, W_{R_k}]$ at a point $\vec{p}$ in the global frame is computed as
-
-\[ F_{R_k} = \Psi\left( \lambda^{-1} (||\vec{t_{g,k}} - \vec{p}||_2 - R_k(\vec{x}))\right) \]
-\[ \lambda = ||K^{-1}\dot{x}||_2 \]
-\[ \vec{x} = \left\lfloor \pi (KT^{-1}_{g,k}\vec{p})\right\rfloor \]
-\[ \Psi(\eta) = \begin{cases}
-\min(1, \frac{\eta}{\mu}) \sign(\eta) & \eta \geq - \mu \\
-\text{null} & \text{otherwise}
-\end{cases} \]
-
-Where $W_{R_k} \propto \cos (\theta) / R_k(x)$ and $\theta$ angle between
-associated pixel ray direction and surface normal in local frame.
-Represents weight for uncertainty of measurement.
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Method -- Mapping as Surface Reconstruction 3}
-
-TSDF are fused together by taking weighted sum of TSDF using raw depth data
-(current frame) and global surface model at previous step:
-
-\[ F_k(\vec{p}) = \frac{W_{k-1}(\vec{p}) F_{k-1}(\vec{p}) + W_{R_k}(\vec{p})F_{R_k}(\vec{p})}
-{W_{k-1}(\vec{p}) + W_{R_k(p)}} \]
-\[ W_k(\vec{p}) = W_{k-1}(\vec{p}) + W_{R_k}(\vec{p}) \]
-\end{frame}
-
-\begin{frame}
-  \frametitle{Method -- Surface Prediction}
-
-Predictions stored as vertex and normal maps denoted $\hat{V_k}$ and $\hat{N_k}$.
-
-Uses dense surface reconstruction (global TSDF) to do per-pixel raycasting.
-
-March along each pixel ray until the SDF transition from positive
-to negative.
-
-For points on surface $F_k(\vec{p}) = 0$, can assume gradient of TSDF at $\vec{p}$
-is orthogonal to level set. So normals obtained using gradient:
-
-\[ \nabla F = \left[ \frac{\partial F}{\partial x}, \frac{\partial F}{\partial y}, \frac{\partial F}{\partial z}\right] \]
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Method -- Sensor Pose Estimation}
-  Estimating current camera pose $T_{w,k} \in \mathbb{SE}_3$.
-  Track sensor by aligning live surface measurement $(V_k, N_k)$ against
-  model prediction from previous frame $(\hat{V_{k-1}}, \hat{N_{k-1}})$.
+\begin{frame}[allowframebreaks]
+\frametitle{Challenges}
+Measurement
 \begin{itemize}
-  \item No feature selection: use all depth data.
-  \item Dense iterated closest point based technique.
-  \item High tracking rate: can assume small motion between frames.
-  \item Uses ``fast projective data association''.
-  \item Uses point-to-plane metric.
+  \item High volume of data (640x480 @ 30fps = 9 million points per sec)
+  \item Occlusion (stuff in the way), holes
+  \item Measurement errors: incident angles, shiny or transparent materials
+  \item Potentially erratic camera movement: blurry measurements
+  \item Dynamic scenes, moving objects
+  \item Camera drift: accumulation of errors in pose estimation
 \end{itemize}
-An iterative solution is obtained by minimizing a linearized energy function:
-\[ E(T_{g,k}) = \sum_{u \in \mathcal{U}} ||(T_{g,k})V_k(u) - \hat{V_{k-1}^g}(\hat{u})^T \hat{N_{k-1}^g}(\hat{u})||_2 \]
+Video: playing with RealSense PointCloud example: \url{https://youtu.be/cQrPQ1dFIYU}
+\end{frame}
 
+
+\begin{frame}[allowframebreaks]
+\frametitle{Frameworks}
+Fusion and alignment algorithms are bundled in a few frameworks:
+\begin{itemize}
+  \item Robot Operating System (ROS)
+  \item Point Cloud Library
+  \item OpenCV (Kinfu)
+\end{itemize}
+
+Intel RealSense SDK provides ``wrappers'' for these frameworks.
+
+Idea: encapsulate sensing device so that a stream (or pipe) can be fed into
+one of these frameworks' algorithms.
+
+\url{https://github.com/IntelRealSense/librealsense/blob/master/wrappers/opencv/kinfu/rs-kinfu.cpp}
 \end{frame}

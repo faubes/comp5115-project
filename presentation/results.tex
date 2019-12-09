@@ -1,34 +1,61 @@
-\begin{frame}
-  \frametitle{Results}
+\begin{frame}[allowframebreaks]
+\frametitle{Results}
 
-Impressive real-time reconstruction of scenes:
+Not good: so far, unable to run any of the open source Fusion algorithms.
 
-\includegraphics[scale=0.35]{img/reconstruction.png}
-\end{frame}
+Complex development environment because of hardware drivers, operating system
+and dependencies. Need to use and configure CMake.
 
-
-\begin{frame}
-  \frametitle{Results 2}
-
-Demos of KinectFusion on YouTube:
-
-  \url{https://www.youtube.com/watch?v=KOUSSlKUJ-A}
-
-STAR: More difficult variation: dynamic scenes
-
-\url{https://www.youtube.com/watch?v=N5bFhtlgRCc}
-\url{https://www.youtube.com/watch?v=Zg0Zaiarlpk}
-\url{https://www.youtube.com/watch?v=2dkcJ1YhYw4}
-
-Also: simultaneous capture of lighting, albedo, material.
-\end{frame}
-
-\begin{frame}
-  \frametitle{Conclusion}
+OpenCV KinFu dependencies:
 \begin{itemize}
-\item KinectFusion defined pipeline for real-time geometry processing.
-\item Paves the way for cool applications in VR and AR.
-\item Cleanly written, well-chosen notation.
+  \item Intel RealSense SDK
+  \item OpenCV and OpenCV\_contrib
+  \item OpenMP
+  \item NVidia GPU drivers and CUDA
+  \item Visual Studio 201X
+  \item GLFW and GLEW
 \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+  \frametitle{Alternate Strategy}
+Experiment with reconstruction by manually aligning point clouds.
+
+Raw point clouds need to be tidied:
+\url{https://youtu.be/on1zKm5XRmk}
+
+Then aligned together using ICP:
+\url{https://youtu.be/FniwUexwY5g}
+
+The results are not very good...
+\begin{center}
+\includegraphics[scale=0.15]{img/cube_man_aligned_point_clouds.PNG}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]
+  \frametitle{Reconstruction}
+
+After using Meshlab's different smoothing, sampling and reconstruction filters:
+
+Poisson sampling:
+\begin{center}
+\includegraphics[scale=0.15]{img/cube_man_poisson_sampling.PNG}
+\end{center}
+
+\framebreak
+
+Reconstruction 1:
+\begin{center}
+\includegraphics[scale=0.15]{img/cube_man_reconstruction1.PNG}
+\end{center}
+
+\framebreak
+
+Reconstruction 2:
+\begin{center}
+\includegraphics[scale=0.15]{img/cube_man_reconstruction2.PNG}
+\end{center}
 
 \end{frame}
