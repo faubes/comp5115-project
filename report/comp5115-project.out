@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.0.1}{Objective}{}% 1
+\BOOKMARK [1][-]{section.0.2}{Methodology}{}% 2
+\BOOKMARK [2][-]{subsection.0.2.1}{Depth Images}{section.0.2}% 3
+\BOOKMARK [2][-]{subsection.0.2.2}{Background subtraction}{section.0.2}% 4
+\BOOKMARK [2][-]{subsection.0.2.3}{Filters}{section.0.2}% 5
+\BOOKMARK [2][-]{subsection.0.2.4}{Pixel to Point Cloud Transformation}{section.0.2}% 6
+\BOOKMARK [1][-]{section.0.3}{Implementation}{}% 7
+\BOOKMARK [1][-]{section.0.4}{Results}{}% 8
+\BOOKMARK [1][-]{section.0.5}{Documentation}{}% 9
+\BOOKMARK [1][-]{section.0.6}{Conclusion}{}% 10

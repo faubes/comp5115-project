@@ -1,0 +1,97 @@
+\section{Implementation}
+
+The following section describes the key steps and algorithms for converting
+depth images into point clouds and using them for 3D reconstruction.
+
+\subsection{Depth Images}
+The following is based on the extensive overview of the camera in \cite{keselman2017intel}.
+That paper mostly discusses the previous generation, but I do not believe the principle
+has significantly changed in the 400 series. The new features seem to be
+additional device-embedded post-processing.
+
+Basically, these cameras produce four-channel image composed of the standard RGB colour channels together with a fourth depth channel. The depth channel associates to each pixel an estimate of the distance from the camera to the surface. There are several techniques for measuring depth using
+light and/or lasers. The RS4XX series of devices use a stereoscopic technique inspired by human
+binocular vision.
+
+The RS4XX cameras compute a pixel's depth by comparing the images
+produced by two cameras placed at a known distance apart and pointing in the same direction.
+After projecting the images onto a common plane
+(the cameras produce images which are slightly ``angled''), the camera computes the \textit{disparity}
+ $d$ between the two images.
+
+Disparity is the distance (in pixels) of a cluster of pixels from one image to the other.
+Objects closer to the camera will have greater disparity between the two images, distant
+objects less so.
+With distance $B$ between the two cameras and the focal length $f$, the disparity allows the camera
+to infer the depth $z$ using the formula:
+
+\[ z = \frac{f \cdot B}{d} \]
+
+However, apparently this simple stereoscopic approach struggles in many different
+environments. To improve the robustness of the depth calculation on a variety
+of textures and surfaces, the devices additionally include an infrared projector.
+
+All of this complexity, of course, is abstracted in the Viewer bundled with the camera.
+Using that software, it is straightforward to take depth-snapshots or videos
+and export them to mesh files.
+
+\subsection{Depth Pixel to Point Cloud Transformation}
+With the $x$ and $y$ coordinates of a pixel and a corresponding depth $z$,
+it is possible to apply a transformation to obtain a point in a 3d frame of
+reference, say, ``in front of the camera''.
+
+This transformation depends on the configuration and specification of each camera.
+Suffice it to say that the RealSense SDK and Viewer offer functions which can
+convert from 2d pixel space to 3d space.
+
+Still, it is important to know that there is a conversion here
+ that may involve a tradeoff. Each pixel's frustum is a thin but expanding shape.
+Therefore, closer pixels are smaller than distant ones. Sophisticated
+transformations take this into consideration when converting into voxels
+or points.
+
+It may be of interest that the RealSense SDK offers a CUDA implementation
+which runs the per-pixel conversion on the GPU.
+
+\subsection{Background subtraction}
+
+In order to align the different point clouds, it is necessary to remove noise and
+outliers. We do not want these points to be considered when attempting to match
+the overlap between two clouds.
+When scanning an object in a room, the background, floor, and other features
+of the room can appear as noise.
+
+Background subtraction is a well-studied problem in image computation \cite{piccardi2004background}.
+A sophisticated approach might adopt some of those techniques, such as
+first taking an ``empty'' snapshot and subtracting it from subsequent ones to
+isolate the model. More complicated approaches construct models of the background
+to accomodate for change over time and so on.
+
+For our purpose of capturing toy examples, it should suffice to set a maximum depth
+and discard the back wall of a fixed scene.
+
+\subsection{Filters}
+
+spatial and temporal
+
+\subsection{Removing Outliers and Errors}
+
+Even with the background subtraction and filters, there are often still
+outliers and errors that should not be included in a quality model.
+Luckily, MeshLab \cite{cignoni2008meshlab} makes it quite easy to select,
+move and delete vertices.
+
+One way to remove extraneous points is to use the connected component selection
+tool to grab the object of interest, then use the selection inversion to select
+every point except the model. All these points can then be deleted.
+
+This process needs to be repeated for each point cloud, each of which will constitute
+a ``layer'' in the model construction.
+
+It is obvious here and in the next section that the Fusion methods -- which
+incrementally build models by merging new points into probabilistic models,
+gaing additional confidence about measurements over time --
+are far superior to this artisanal approach.
+
+
+\subsection{}

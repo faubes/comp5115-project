@@ -1,0 +1,15 @@
+\section{Objective}
+
+This project investigates techniques for producing 3d models using consumer
+grade depth sensors. The goal is to use the Intel RealSense D435 camera (the D435),
+the Software Development Kit (the RealSense SDK) and the Viewer to capture
+depth images and point clouds.
+
+State of the art techniques pioneered by Kinect Fusion \cite{newcombe2011kinectfusion}
+ build models incrementally by merging (or fusing) a series of depth images into
+ a common frame of reference. These techniques require careful memory management,
+ complicated data structures and use of GPU accelerated code.
+
+In order to better understand these techniques, we simulate the algorithm by
+manually collecting, cleaning and merging point clouds, then attempting
+to reconstruct polygonal meshes.
