@@ -1,0 +1,94 @@
+<!DOCTYPE MeshLabDocument>
+<MeshLabProject>
+ <MeshGroup>
+  <MLMesh label="cube_man5.ply" filename="clean/5.ply">
+   <MLMatrix44>
+-0.702754 -0.202953 0.681869 0.174256 
+0.396749 0.683764 0.612419 0.262955 
+-0.59053 0.700912 -0.399996 -0.577802 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man6.ply" filename="clean/6.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man7.ply" filename="clean/7.ply">
+   <MLMatrix44>
+0.906404 0.32356 -0.271552 -0.229343 
+-0.234901 0.920385 0.312589 0.166137 
+0.351074 -0.219544 0.910246 -0.0477507 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man8.ply" filename="clean/8.ply">
+   <MLMatrix44>
+0.864212 0.396576 -0.508544 -0.379084 
+-0.225146 0.982355 0.383457 0.277934 
+0.604317 -0.20114 0.870112 -0.221041 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man9.ply" filename="clean/9.ply">
+   <MLMatrix44>
+0.962083 -0.0190795 0.386172 0.178429 
+0.0203738 1.03667 0.000460654 0.000326935 
+-0.386106 0.00716065 0.962272 -0.0188346 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man10.ply" filename="clean/10.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man11.ply" filename="clean/11.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man12.ply" filename="clean/12.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man13.ply" filename="clean/13.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="cube_man14.ply" filename="clean/14.ply">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+  <MLMesh label="Merged Mesh" filename="two merges.ply">
+   <MLMatrix44>
+0.93659 0.250518 0.24503 0.0994509 
+-0.170376 0.936564 -0.306301 -0.13471 
+-0.30622 0.245132 0.919859 -0.0440858 
+0 0 0 1 
+</MLMatrix44>
+  </MLMesh>
+ </MeshGroup>
+ <RasterGroup/>
+</MeshLabProject>
