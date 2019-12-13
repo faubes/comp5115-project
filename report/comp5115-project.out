@@ -1,10 +1,14 @@
 \BOOKMARK [1][-]{section.0.1}{Objective}{}% 1
 \BOOKMARK [1][-]{section.0.2}{Methodology}{}% 2
-\BOOKMARK [2][-]{subsection.0.2.1}{Depth Images}{section.0.2}% 3
-\BOOKMARK [2][-]{subsection.0.2.2}{Background subtraction}{section.0.2}% 4
-\BOOKMARK [2][-]{subsection.0.2.3}{Filters}{section.0.2}% 5
-\BOOKMARK [2][-]{subsection.0.2.4}{Pixel to Point Cloud Transformation}{section.0.2}% 6
-\BOOKMARK [1][-]{section.0.3}{Implementation}{}% 7
-\BOOKMARK [1][-]{section.0.4}{Results}{}% 8
-\BOOKMARK [1][-]{section.0.5}{Documentation}{}% 9
-\BOOKMARK [1][-]{section.0.6}{Conclusion}{}% 10
+\BOOKMARK [1][-]{section.0.3}{Implementation}{}% 3
+\BOOKMARK [2][-]{subsection.0.3.1}{Depth Images}{section.0.3}% 4
+\BOOKMARK [2][-]{subsection.0.3.2}{Depth Pixel to Point Cloud Transformation}{section.0.3}% 5
+\BOOKMARK [2][-]{subsection.0.3.3}{Background subtraction}{section.0.3}% 6
+\BOOKMARK [2][-]{subsection.0.3.4}{Filters}{section.0.3}% 7
+\BOOKMARK [2][-]{subsection.0.3.5}{Removing Outliers and Errors}{section.0.3}% 8
+\BOOKMARK [2][-]{subsection.0.3.6}{Aligning Point Clouds}{section.0.3}% 9
+\BOOKMARK [2][-]{subsection.0.3.7}{Simplifications, Sampling and Smoothing}{section.0.3}% 10
+\BOOKMARK [1][-]{section.0.4}{Results}{}% 11
+\BOOKMARK [1][-]{section.0.5}{Documentation}{}% 12
+\BOOKMARK [1][-]{section.0.6}{Conclusion}{}% 13
+\BOOKMARK [1][-]{section.Alph0.1}{Comparing Post Processing}{}% 14

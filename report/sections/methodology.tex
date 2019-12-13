@@ -1,9 +1,10 @@
 \section{Methodology}
-Specifically, this report includes:
+After taking a quick look at the stereoscopic depth camera's inner workings, this
+report details the capturing and aligning of point clouds for model reconstruction.
+This process consists of a few steps:
 
  \begin{itemize}
-   \item a quick look at the stereoscopic depth camera's inner workings,
-   \item the use of the RealSense SDK and Viewer to produce point clouds,
+   \item the use of the RealSense SDK and Viewer to produce depth images and point clouds \cite{librealsense},
    \item the use of MeshLab's registration (or align) methods to merge point clouds,
    \item a survey of some techniques available for smoothing, eliminating noise, and
    \item reconstructing a mesh from the merged point clouds.
